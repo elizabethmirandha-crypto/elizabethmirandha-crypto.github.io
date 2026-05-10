@@ -1,1 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Elizabeth Miranda - Comunicación, eventos y cobertura editorial CDMX">
+    <title>Elizabeth Miranda — Comunicación CDMX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #f5f5f5;
+            --accent: #d4a574;
+            --text: #2a2a2a;
+            --light: #666;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            background: var(--secondary);
+            line-height: 1.6;
+        }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 800; }
+        h2 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 700; }
+        h3 { font-size: clamp(1.25rem, 4vw, 1.75rem); font-weight: 600; }
+        p { font-size: 0.95rem; color: var(--light); margin-bottom: 1.5rem; line-height: 1.8; }
+        a { color: var(--text); text-decoration: none; transition: 0.3s; }
+        a:hover { color: var(--accent); }
 
+        header {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .header-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        nav {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+        nav a {
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        nav a:hover { color: var(--accent); }
+        .menu-toggle { display: none; background: none; border: none; color: var(--secondary); font-size: 1.5rem; cursor: pointer; }
+
+        @media (max-width: 768px) {
+            nav {
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.5rem;
+                display: none;
+            }
+            nav.active { display: flex; }
+            .menu-toggle { display: block; }
+            .header-wrap { flex-direction: column; align-items: flex-start; }
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            color: var(--secondary);
+            padding: clamp(3rem, 12vh, 8rem) 1.5rem;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero h1 { color: var(--secondary); margin-bottom: 1.5rem; }
+        .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.25rem, 4vw, 2rem);
+            font-weight: 300;
+            color: var(--accent);
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+        .hero-desc {
+            max-width: 600px;
+            color: rgba(255,255,255,0.85);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+        .cta {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.875rem 2rem;
+            border-radius: 2px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            border: 2px solid var(--accent);
+            transition: 0.3s;
+        }
+        .cta:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        section {
+            padding: 4.5rem 1.5rem;
+            scroll-margin-top: 60px;
+        }
+        .section-title {
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .section-title h2 {
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        #sobre {
+            background: var(--secondary);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .box {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 2.5rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        .label {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .box h3 { color: var(--secondary); }
+        .box p { color: rgba(255,255,255,0.9); }
+
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; }
+        }
+
+        #notas {
+            background: var(--primary);
+            color: var(--secondary);
+        }
+        .notas-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        .nota {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212,165,116,0.3);
+            padding: 3rem;
+            border-radius: 4px;
+        }
+        .nota h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .nota-fecha {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 1.5rem;
+        }
+        .nota p {
+            color: rgba(255,255,255,0.9);
+        }
+
+        #contacto {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            color: var(--secondary);
+            text-align: center;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        .contact-item {
+            padding: 1.5rem;
+            border: 1px solid rgba(212,165,116,0.3);
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+        .contact-item:hover {
+            border-color: var(--accent);
+            background: rgba(212,165,116,0.1);
+        }
+        .contact-item a {
+            color: var(--accent);
+        }
+
+        footer {
+            background: var(--primary);
+            color: rgba(255,255,255,0.6);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(212,165,116,0.2);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 2.5rem 1.5rem; }
+            .hero { min-height: 60vh; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-wrap">
+        <div class="logo">E.M</div>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <nav id="navMenu">
+            <a href="#sobre">Sobre mí</a>
+            <a href="#notas">Notas</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Elizabeth<br>Miranda</h1>
+        <div class="tagline">Comunicación · Eventos · Cobertura Editorial</div>
+        <p class="hero-desc">Profesional en comunicación con experiencia en producción de eventos, activaciones de marca y cobertura editorial. Actualmente con Wonderluxe MX.</p>
+        <a href="#contacto" class="cta">Contactar</a>
+    </div>
+</section>
+
+<section id="sobre">
+    <div class="container">
+        <div class="section-title">
+            <h2>Sobre mí</h2>
+        </div>
+        
+        <div class="about-grid">
+            <div>
+                <p>Soy comunicóloga con formación en Relaciones Públicas y Protocolo de Eventos (CEUPE, en curso). Mi experiencia incluye producción de eventos, apoyo operativo, scouting de locaciones, coordinación con talento creativo y generación de contenido.</p>
+                <p>Trabajo actualmente con Wonderluxe MX en producción y logística de eventos. Soy proactiva, aprendo rápido, organizada y con sentido de discreción. Manejo personal responsable, tengo capacidad de adaptación y disposición para trabajar en equipo.</p>
+            </div>
+            <div>
+                <div class="box">
+                    <div class="label">Formación</div>
+                    <h3>Licenciatura</h3>
+                    <p>Ciencias de la Comunicación — UVM (2018-2021)</p>
+                </div>
+                
+                <div class="box">
+                    <div class="label">Postgrado</div>
+                    <h3>Maestría</h3>
+                    <p>Relaciones Públicas y Protocolo de Evento — CEUPE (2024-Cursando)</p>
+                </div>
+
+                <div class="box">
+                    <div class="label">Diplomados</div>
+                    <p>Periodismo — UVM<br>Estrategias Gerenciales — UVM<br>Fotografía e Imagen — UVM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="notas">
+    <div class="container">
+        <div class="section-title">
+            <h2>Notas & Cobertura</h2>
+        </div>
+        
+        <div class="notas-grid">
+            <div class="nota">
+                <h3>Espacio Vogue 2026: Lujo, Diseño y Curaduría Mexicana en Cuatro Días de Moda</h3>
+                <p class="nota-fecha">Abril 9-12, 2026 | Hotel Four Seasons, Ciudad de México</p>
+                <p>Llegó el momento más esperado del año: Espacio Vogue 2026 en colaboración con Casa AD nos ofreció una espectacular curaduría llena de marcas mexicanas y latinoamericanas reconocidas que combinaron lujo, presencia, raíces, cultura y moda en un solo lugar.</p>
+                <p>Del 9 al 12 de abril, el Hotel Four Seasons ubicado en la Ciudad de México albergó esta gran experiencia de moda. La pop-up también incluyó un live shopping con ropa, joyería y diseño para el hogar, gracias a la colaboración con Casa AD.</p>
+                <p>Cabe destacar la curaduría especial de Vogue Vintage Market, con piezas donadas por celebridades y colaboradores de la editorial. El evento fue presentado por Magnum, que además tuvo activación de marca con su nuevo sabor Bliss de nuez con chocolate, una colaboración con el diseñador mexicano Jesús de la Garsa, quien creó una colección inspirada en las texturas y colores de esta paleta.</p>
+                <p>El momento del corte de listón fue encabezado por Karla Martínez Salas, Katia Contreras, y las embajadoras Denisse De Alba, Regina Peredo, Isidora Vives e Irene Anzuela.</p>
+            </div>
+
+            <div class="nota">
+                <h3>The Mandalorian and Grogu: 20 Minutos de Acción Pura en Pantalla IMAX</h3>
+                <p class="nota-fecha">Mayo 4, 2026 | Cinemex IMAX Antara | Estreno: 21 de mayo</p>
+                <p>Tuvimos la oportunidad de ver los primeros 20 minutos de The Mandalorian and Grogu en las grandiosas pantallas IMAX de Cinemex Antara. Sin spoilers, vale completamente la pena verla.</p>
+                <p>Podemos ver a Din Djarin (Pedro Pascal) y Grogu en modo cazadores, persiguiendo a quienes quieren continuar con el imperio, sin que Grogu pierda la ternura que lo caracteriza. Esta es quizás la más inteligente decisión creativa de la franquicia: mantener el humor, la emotividad y la humanidad del personaje, incluso en momentos de acción desenfrenada.</p>
+                <p>El presupuesto es tremendo: una película llena de acción que mantiene el sabor de las primeras producciones de la franquicia. La dirección de fotografía aprovecha cada pixel de la tecnología IMAX. Las secuencias de acción tienen peso, consecuencia y lógica narrativa.</p>
+                <p>Es imprescindible no perdérsela. Si eres fan de Star Wars, si amas el universo de Din Djarin y Grogu, si simplemente quieres ver cine de acción bien hecho en IMAX: este es tu filme.</p>
+            </div>
+
+            <div class="nota">
+                <h3>Charalita: Marisquería Urbana con Esencia Chilanga en La Roma</h3>
+                <p class="nota-fecha">Abril 24, 2026 | Av Oaxaca 99, La Roma, Ciudad de México</p>
+                <p>Ubicado en Avenida Oaxaca 99, Colonia La Roma, nos encontramos con Charalita, una marisquería que sale de lo convencional. Su enfoque es urbano, con ingredientes frescos traídos directamente del Mercado de la Viga. Su propuesta gastronómica está inspirada en la cultura chilanga: en cada platillo se aprecia la creatividad de conservar la esencia de los típicos platillos y bebidas capitalinos.</p>
+                <p>Un imperdible es la deliciosa tostada de atún con mayonesa de la casa coronada con fresco aguacate. Si te gusta el picante, el aguachile de camarones con habanero es una mezcla perfecta: pepino fresco rebozado en habanero con camarón. En postres, el flan de mazapán con pistache se lleva la medalla, acompañado de un rico carajillo.</p>
+                <p>La variedad es realmente extensa: refrescantes cervezas y micheladas completan la experiencia. Su ambiente de terraza, decorado con plantas, refresca el espacio brindando tranquilidad. Además, cuentan con DJ los fines de semana.</p>
+                <p>Lo importante de este lugar es que el dueño no solo piensa en los proveedores locales —todos los productos se compran en el Mercado de la Viga—, sino que además da oportunidad a nuevos talentos. Si buscas sabor y ambiente, Charalita es el lugar perfecto.</p>
+            </div>
+
+            <div class="nota">
+                <h3>Mi Voz por Ellos: Visibilizando el Abuso Infantil #MIVOZPORELLOS</h3>
+                <p class="nota-fecha">Abril 30, 2026 | Crece Pedregal, Ciudad de México</p>
+                <p>El pasado 30 de abril asistimos a la 5ª edición de #MiVozPorEllos. Crece y Fundación Freedom organizaron este encuentro realizado en Crece Pedregal CDMX. Esta alianza busca visibilizar el abuso infantil en México y mostrar que existen infinidad de agresiones y microagresiones más allá de la violencia física que, aunque parezcan inofensivas, se clasifican dentro de la violencia infantil.</p>
+                <p>Tuvimos oportunidad de escuchar el testimonio de sus embajadoras, expertas en el tema, quienes enseñaron cómo identificar si nuestros pequeños sufren violencia. Entre ellas: Judith Amon, especialista en neurodesarrollo infantil y CEO de Centro Crece; Fernanda Escalera, psicóloga clínica y creadora del programa Círculo Seguro; Alice Sitt, psicoterapeuta especializada en abuso sexual y trauma; y Pay Campos, Master Coach y Facilitadora Certificada.</p>
+                <p>Estas mujeres prestan su voz para concienciar al mundo, hacen ruido por quienes no pueden. Ofrecen el curso para la prevención del abuso infantil completamente gratis durante todo el mes de mayo. La seguridad de los niños no debería ser negociable.</p>
+            </div>
+
+            <div class="nota">
+                <h3>Trunk Show Villa San Jacinto: El Momento de la Moda Mexicana</h3>
+                <p class="nota-fecha">Mayo 7, 2026 | Villa San Jacinto, San Ángel, Ciudad de México</p>
+                <p>El pasado 7 de mayo, San Ángel se convirtió en el escenario perfecto para la moda mexicana. Villa San Jacinto albergó un Trunk Show que reunió a algunas de las firmas más representativas del diseño mexicano. Bajo el lema "Es el momento de la moda mexicana", el evento fue exactamente eso: un encuentro entre diseñadores, coleccionistas y personas que buscan piezas con identidad y propuesta clara.</p>
+                <p>La cita comenzó a las 11:00 horas en un espacio hermoso, con su arquitectura colonial y jardines cuidados. Bajo sombrillas beige y en un ambiente tranquilo, los asistentes conocieron de primera mano las propuestas de cada marca. El formato de trunk show permite ese encuentro íntimo entre el diseñador y el público, sin intermediarios.</p>
+                <p>Entre las marcas destacaron Pineda Covalín con sus estampas vibrantes, Macario Jiménez con sus siluetas minimalistas, Regina Dondé con sus textiles innovadores, Lydia Lavín mezclando tradición y modernidad, Chingona, y más, además de propuestas en joyería y diseño especializado.</p>
+                <p>Este Trunk Show recordó que el diseño mexicano brilla con luz propia. No necesita permiso de París o Nueva York. Tiene sus propias raíces, su propio lenguaje, su propia autoridad. Si buscas moda con identidad, este era exactamente el lugar.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contacto">
+    <div class="container">
+        <div class="section-title" style="justify-content: center;">
+            <h2>Contacto</h2>
+        </div>
+        
+        <p>¿Tienes un proyecto, evento o colaboración en mente?</p>
+
+        <div class="contact-grid">
+            <div class="contact-item">
+                <div class="label">Email</div>
+                <a href="mailto:elizabeth.mirandha@gmail.com">elizabeth.mirandha@gmail.com</a>
+            </div>
+
+            <div class="contact-item">
+                <div class="label">Teléfono</div>
+                <a href="tel:+525551675173">(55) 5167-5173</a>
+            </div>
+
+            <div class="contact-item">
+                <div class="label">Instagram</div>
+                <a href="https://instagram.com/elimirandha" target="_blank">@elimirandha</a>
+            </div>
+
+            <div class="contact-item">
+                <div class="label">LinkedIn</div>
+                <a href="https://linkedin.com/in/elizabeth-miranda" target="_blank">Elizabeth Miranda</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>Elizabeth Miranda · Comunicación · CDMX</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">© 2026</p>
+    </div>
+</footer>
+
+<script>
+document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('navMenu').classList.toggle('active');
+});
+
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('navMenu').classList.remove('active');
+    });
+});
+</script>
+
+</body>
+</html>
